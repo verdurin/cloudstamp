@@ -2,7 +2,7 @@
 
 class {
   'vmbase':
-    msg => "CloudStamp CMS Open Data Image",
+    msg => "CloudStamp CMS Patrick Dunne Image",
 }
 
 class {
@@ -14,4 +14,4 @@ class {
 include ssh_keys
 include wlcg
 include wn_install
-include cms_open_data
+

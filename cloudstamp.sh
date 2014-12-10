@@ -57,7 +57,9 @@ find config -print | cpio --quiet -ocAO ${TMPDIR}/initrd.tmp
 ${GZIP_BIN} -9 ${TMPDIR}/initrd.tmp
 
 echo "[*] Creating disk image..." >&2
-${QEMU_IMG_BIN} create -f qcow2 "${TMPDIR}/${IMG_NAME}" ${IMG_SIZE} >&-
+# As a quick fix, disable lazy_refcounts for RHEL6 compatibility
+# TODO: change this commmand based on the OS of the destination 
+${QEMU_IMG_BIN} create -f qcow2 -o compat=0.10 "${TMPDIR}/${IMG_NAME}" ${IMG_SIZE} >&-
 echo "[*] Booting Installer..." >&2
 ${QEMU_BIN} -nographic \
             -m ${INST_MEM} \

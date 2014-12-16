@@ -7,8 +7,8 @@ class {
 
 class {
   'cvmfs':
-    squid_list => 'http://squid-proxy.cms:3128',
-    cms_site => 'T2_CH_CERN_HLT',
+    squid_list => 'http://squid02.gridpp.rl.ac.uk:3128,http://squid03.gridpp.rl.ac.uk:3128,http://squid04.gridpp.rl.ac.uk:3128,http://squid05.gridpp.rl.ac.uk:3128',
+    cms_site => 'T2_UK_London_IC',
 }
 
 
@@ -115,13 +115,17 @@ class cmshlt_wn_install {
     'condor':
       ensure => present,
       require => Yumrepo['HTCondor'],
+      before => File['/etc/condor/config.d/01_HLT_Global', \
+                     '/etc/condor/config.d/02_HLT_Worker_Defaults', \
+                     '/etc/condor/config.d/01_HLT_Partitionable_Slots', \
+                     '/etc/condor/config.d/01_HLT_Security', \
+                     '/etc/condor/config.d/01_HLT_DebugSettings'],
   }
 }
 
 include cmshlt_wn_install
 include ssh_keys
-include glidein
 include wlcg
-#include htcondor_hlt_heat
+include htcondor_hlt_heat
 #include proxy_hlt_heat
 

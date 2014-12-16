@@ -115,11 +115,7 @@ class cmshlt_wn_install {
     'condor':
       ensure => present,
       require => Yumrepo['HTCondor'],
-      before => File['/etc/condor/config.d/01_HLT_Global', \
-                     '/etc/condor/config.d/02_HLT_Worker_Defaults', \
-                     '/etc/condor/config.d/01_HLT_Partitionable_Slots', \
-                     '/etc/condor/config.d/01_HLT_Security', \
-                     '/etc/condor/config.d/01_HLT_DebugSettings'],
+      before => File['/etc/condor/config.d/01_HLT_Global','/etc/condor/config.d/02_HLT_Worker_Defaults','/etc/condor/config.d/01_HLT_Partitionable_Slots','/etc/condor/config.d/01_HLT_Security','/etc/condor/config.d/01_HLT_DebugSettings'],
   }
 }
 
